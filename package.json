@@ -6,8 +6,8 @@
   "scripts": {
     "compose:up": "(cd . && docker-compose up -d --build)",
     "compose:down": "(cd . && docker-compose down --remove-orphans)",
-    "compose:up:dev": "(cd . && docker-compose -f docker-compose-dev.yml up -d --build)",
-    "compose:down:dev": "(docker-compose -f docker-compose-dev.yml down --remove-orphans)"
+    "compose:up:dev": "(cd . && docker-compose -f docker-compose.dev.yml up -d --build)",
+    "compose:down:dev": "(docker-compose -f docker-compose.dev.yml down --remove-orphans)"
   },
   "repository": {
     "type": "git",
