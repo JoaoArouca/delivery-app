@@ -1,0 +1,23 @@
+{
+  "name": "delivery-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compose:up": "(cd . && docker-compose up -d --build)",
+    "compose:down": "(cd . && docker-compose down --remove-orphans)",
+    "compose:up:dev": "(cd . && docker-compose -f docker-compose-dev.yml up -d --build)",
+    "compose:down:dev": "(docker-compose -f docker-compose-dev.yml down --remove-orphans)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoArouca/delivery-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoaoArouca/delivery-app/issues"
+  },
+  "homepage": "https://github.com/JoaoArouca/delivery-app#readme"
+}
