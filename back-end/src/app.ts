@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express';
 import router from './routes';
 const cors = require('cors');
