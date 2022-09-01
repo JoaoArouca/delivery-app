@@ -10,7 +10,7 @@ export default class UserController {
     try {
       const newUser = await this.service.register(req.body)
       
-      return res.status(201).json({ token: newUser });
+      return res.status(201).json(newUser);
     } catch (error) {
       const handleError = error as Error;
       return res.status(400).json(handleError.message)
