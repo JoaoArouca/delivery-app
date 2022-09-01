@@ -21,8 +21,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
-    "mysql2": "^2.3.3",
-    "sequelize": "^6.21.4"
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
@@ -32,14 +31,14 @@
     "@types/jsonwebtoken": "^8.5.9",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.7.13",
-    "@types/sequelize": "^4.28.14",
     "@types/sinon": "^10.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
     "eslint": "^8.22.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
-    "sequelize-cli": "^6.4.1",
     "sinon": "^14.0.0",
     "superagent": "^8.0.0",
     "ts-node": "^10.9.1",
