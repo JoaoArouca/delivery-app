@@ -9,7 +9,7 @@ const validator = new Validator();
 const userService = new UserService(validator);
 const user = new UserController(userService);
 
-userRouter.post('/login');
+userRouter.post('/login', user.login);
 userRouter.post('/register', user.register);
 
 export default userRouter;

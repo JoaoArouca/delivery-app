@@ -16,4 +16,15 @@ export default class UserController {
       return res.status(400).json(handleError.message)
     }
   }
+
+  login = async (req: Request, res: Response) => {
+    try {
+      await this.service.login(req.body);
+
+      return res.status(201).json();
+    } catch (error) {
+      const handleError = error as Error;
+      return res.status(400).json(handleError.message)
+    }
+  }
 }

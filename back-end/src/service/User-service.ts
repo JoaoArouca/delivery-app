@@ -27,6 +27,22 @@ class UserService {
     const { password, ...userInfo } = newUser;
     return { ...userInfo, token };
   }
+
+  async login (payload: IUser) {
+    const { email, password } = payload;
+
+    if (!email || !password) {
+      throw new Error('Some fields are missing');
+    }
+
+    const user = await prisma.userModel.findFirst({ where: { email } });
+
+    if (!user || user.password !== password) {
+      throw new Error('Invalid fields');
+    }
+
+    console.log(user);
+  }
 }
 
 export default UserService;
