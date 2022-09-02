@@ -32,7 +32,7 @@ describe('User Controller - Test', () => {
       name: 'Maria'
     });
 
-    console.log(chaiHttpResponde);
+    expect(chaiHttpResponde.body.token).to.exist;
     
   });
 

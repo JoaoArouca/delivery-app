@@ -1,4 +1,3 @@
-// import User from '../database/model/UserModel'
 import generateToken from '../tools/TokenGenerator';
 import prisma from '../database.prisma';
 import { IUser } from '../interfaces/index';
