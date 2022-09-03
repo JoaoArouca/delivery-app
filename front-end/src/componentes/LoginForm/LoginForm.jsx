@@ -1,25 +1,35 @@
-import Button from 'react-bootstrap/Button';
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import Button from 'react-bootstrap/Button';
 
-function LoginForm() {
+export default function LoginForm() {
+  const {
+    register, handleSubmit, formState: { errors, isValid, isDirty },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   return (
     <form>
-      <label htmlFor="email">
-        <input id="email" type="text" />
-      </label>
+      <input placeholder="Email" {...register('email', { required: true })} />
 
-      <label htmlFor="password">
-        <input id="password" type="password" />
-      </label>
+      <input
+        placeholder="Senha"
+        type="password"
+        {...register('password', { required: true, minLength: 6 })}
+      />
+
+      {errors.email && <span>Password required</span>}
+      {errors.password && errors.password.type === 'required' && <span>Password required</span>}
+      {errors.password && errors.password.type === 'minLength' && <span>ate least 6 characters</span>}
 
       <Button
-        variant="success"
-        disabled
+        disabled={!isDirty || !isValid}
+        type="button"
+        onClick={handleSubmit(onSubmit)}
       >
         Entrar
       </Button>
     </form>
   );
 }
-
-export default LoginForm;
