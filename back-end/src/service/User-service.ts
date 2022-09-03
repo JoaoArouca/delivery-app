@@ -1,8 +1,7 @@
-// import User from '../database/model/UserModel'
 import generateToken from '../tools/TokenGenerator';
 import prisma from '../database.prisma';
 import { IUser } from '../interfaces/index';
-
+import { Md5 } from 'md5-typescript';
 class UserService {
 
   constructor (private validator: any) {
@@ -19,8 +18,10 @@ class UserService {
       throw new Error('User already exists');
     }
 
+    const hash = Md5.init(payload.password);    
+
     const newUser = await prisma.userModel.create({
-      data: { email, name, password: payload.password }
+      data: { email, name, password: hash }
     });
 
     const token = generateToken({ name, email } as IUser);
@@ -35,9 +36,11 @@ class UserService {
       throw new Error('Some fields are missing');
     }
 
-    const user = await prisma.userModel.findFirst({ where: { email } });
+    const hash = Md5.init(password);
 
-    if (!user || user.password !== password) {
+    const user = await prisma.userModel.findFirst({ where: { email, password: hash } });
+
+    if (!user) {
       throw new Error('Invalid fields');
     }
 

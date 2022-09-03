@@ -21,6 +21,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
+    "md5-typescript": "^1.0.5",
     "mysql2": "^2.3.3"
   },
   "devDependencies": {
