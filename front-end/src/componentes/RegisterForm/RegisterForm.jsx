@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { MdAlternateEmail } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { TbLetterA } from 'react-icons/tb';
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [isShowingPassword, showPassword] = useState(false);
 
   const {
@@ -20,6 +20,18 @@ export default function LoginForm() {
 
   return (
     <form>
+      <div>
+        <input
+          placeholder="Nome"
+          {...register('name', { required: true })}
+        />
+        <span>
+          <TbLetterA
+            size="24"
+          />
+        </span>
+      </div>
+
       <div>
         <input
           placeholder="Email"
@@ -38,18 +50,16 @@ export default function LoginForm() {
           type={isShowingPassword ? 'text' : 'password'}
           {...register('password', { required: true, minLength: 6 })}
         />
-        <span className="mx-3">
+        <span>
           {isShowingPassword ? (
             <FiEye
               onClick={() => showPassword(false)}
               size="24"
-              className="text-gray-400"
             />
           ) : (
             <FiEyeOff
               onClick={() => showPassword(true)}
               size="24"
-              className="text-gray-400"
             />
           )}
         </span>
@@ -60,14 +70,12 @@ export default function LoginForm() {
         variant="success"
         onClick={handleSubmit(onSubmit)}
       >
-        Entrar
+        Registrar
       </Button>
 
       {errors.email && <span>Password required</span>}
       {errors.password && errors.password.type === 'required' && <span>Password required</span>}
       {errors.password && errors.password.type === 'minLength' && <span>at least 6 characters</span>}
-
-      <Link to="/register">Ainda não tem conta? Registre-se</Link>
     </form>
   );
 }
