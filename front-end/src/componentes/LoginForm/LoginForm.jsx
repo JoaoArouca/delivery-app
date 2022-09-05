@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Button from 'react-bootstrap/Button';
 
 export default function LoginForm() {
   const {
@@ -29,11 +30,14 @@ export default function LoginForm() {
       {errors.password && errors.password.type === 'required' && <span>Password required</span>}
       {errors.password && errors.password.type === 'minLength' && <span>ate least 6 characters</span>}
 
-      <input
+      <Button
         disabled={!isValid}
         type="submit"
+        variant="success"
         onClick={handleSubmit(onSubmit)}
-      />
+      >
+        Entrar
+      </Button>
     </form>
   );
 }
