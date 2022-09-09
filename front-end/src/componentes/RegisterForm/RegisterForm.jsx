@@ -5,10 +5,14 @@ import Button from 'react-bootstrap/Button';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { MdAlternateEmail } from 'react-icons/md';
 import { TbLetterA } from 'react-icons/tb';
+import { useNavigate } from 'react-router-dom';
+import { setStorage } from '../../localstorage';
+import { registerr } from '../../services';
 
 export default function RegisterForm() {
   const [isShowingPassword, showPassword] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
   const {
     register, handleSubmit, formState: { errors, isValid },
   } = useForm({
@@ -16,7 +20,19 @@ export default function RegisterForm() {
     mode: 'onChange',
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    setErrorMessage('');
+    try {
+      const user = await registerr(data);
+      if (user) {
+        setStorage('user', user);
+        navigate('/main');
+      }
+    } catch (error) {
+      const response = error?.response?.data || error?.message;
+      setErrorMessage(response);
+    }
+  };
 
   return (
     <form>
@@ -64,6 +80,7 @@ export default function RegisterForm() {
           )}
         </span>
       </div>
+
       <Button
         disabled={!isValid}
         type="submit"
@@ -76,6 +93,7 @@ export default function RegisterForm() {
       {errors.email && <span>Password required</span>}
       {errors.password && errors.password.type === 'required' && <span>Password required</span>}
       {errors.password && errors.password.type === 'minLength' && <span>at least 6 characters</span>}
+      {errorMessage !== '' && <span>{ errorMessage }</span>}
     </form>
   );
 }

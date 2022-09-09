@@ -4,10 +4,14 @@ import { useForm } from 'react-hook-form';
 import Button from 'react-bootstrap/Button';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { MdAlternateEmail } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../services/index';
+import { setStorage } from '../../localstorage';
 
 export default function LoginForm() {
   const [isShowingPassword, showPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const {
     register, handleSubmit, formState: { errors, isValid },
@@ -16,7 +20,19 @@ export default function LoginForm() {
     mode: 'onChange',
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    setErrorMessage('');
+    try {
+      const user = await login(data);
+      if (user) {
+        setStorage('user', user);
+        navigate('/main');
+      }
+    } catch (error) {
+      const response = error?.response?.data || error?.message;
+      setErrorMessage(response);
+    }
+  };
 
   return (
     <form>
@@ -54,6 +70,7 @@ export default function LoginForm() {
           )}
         </span>
       </div>
+
       <Button
         disabled={!isValid}
         type="submit"
@@ -66,6 +83,7 @@ export default function LoginForm() {
       {errors.email && <span>Password required</span>}
       {errors.password && errors.password.type === 'required' && <span>Password required</span>}
       {errors.password && errors.password.type === 'minLength' && <span>at least 6 characters</span>}
+      {errorMessage !== '' && <span>{ errorMessage }</span>}
 
       <Link to="/register">Ainda não tem conta? Registre-se</Link>
     </form>
