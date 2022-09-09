@@ -30,20 +30,22 @@ class UserService {
   }
 
   async login (payload: IUser) {
-    const { email, password } = payload;
+    const { email } = payload;
 
-    if (!email || !password) {
+    if (!email || !payload.password) {
       throw new Error('Some fields are missing');
     }
 
-    const hash = Md5.init(password);
+    const hash = Md5.init(payload.password);
 
     const user = await prisma.userModel.findFirst({ where: { email, password: hash } });
+    const { password, ...userInfo } = user as IUser;
+    const token = generateToken(userInfo  as IUser);
 
     if (!user) {
       throw new Error('Invalid fields');
     }
-    return user;
+    return {...userInfo, token};
   }
 }
 
