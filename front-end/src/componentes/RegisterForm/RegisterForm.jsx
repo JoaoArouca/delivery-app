@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { MdAlternateEmail } from 'react-icons/md';
 import { TbLetterA } from 'react-icons/tb';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { setStorage } from '../../localstorage';
 import { registerr } from '../../services';
 
@@ -94,6 +94,8 @@ export default function RegisterForm() {
       {errors.password && errors.password.type === 'required' && <span>Password required</span>}
       {errors.password && errors.password.type === 'minLength' && <span>at least 6 characters</span>}
       {errorMessage !== '' && <span>{ errorMessage }</span>}
+
+      <Link to="/login">Já tenho uma conta</Link>
     </form>
   );
 }
