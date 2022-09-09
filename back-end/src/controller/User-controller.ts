@@ -19,9 +19,9 @@ export default class UserController {
 
   login = async (req: Request, res: Response) => {
     try {
-      await this.service.login(req.body);
+      const user = await this.service.login(req.body);
 
-      return res.status(201).json();
+      return res.status(201).json(user);
     } catch (error) {
       const handleError = error as Error;
       return res.status(400).json(handleError.message)

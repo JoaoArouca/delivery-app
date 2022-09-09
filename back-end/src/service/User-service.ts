@@ -43,8 +43,7 @@ class UserService {
     if (!user) {
       throw new Error('Invalid fields');
     }
-
-    console.log(user);
+    return user;
   }
 }
 
